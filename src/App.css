@@ -1,0 +1,272 @@
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page-header, .page-footer {
+  position: relative;
+  height: 125px;
+
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .page-header {
+    height: 100px;
+  }
+
+  .page-footer {
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: black;
+  }
+
+  .footer-title {
+    color: white;
+  }
+}
+
+.page-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 32px;
+}
+
+@media (max-width: 700px) {
+  .page-title {
+    font-size: 20px;
+  }
+}
+
+.subsection-title {
+  margin: 0;
+
+  font-family: 'Dosis', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+
+  cursor: default;
+}
+
+.subsection-body {
+  margin: 0;
+
+  font-family: 'Dosis', sans-serif;
+  font-size: 20px;
+
+  cursor: default;
+}
+
+@media (max-width: 700px) {
+  .subsection-title {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .subsection-body {
+    font-size: 16px;
+  }
+}
+
+.work-processes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.work-process {
+  margin-bottom: 45px;
+}
+
+.work-process-title.is-selected {
+  color: #45c0ff;
+}
+
+.work-process-description.is-selected {
+  color: #45c0ff;
+}
+
+.work-process-illustration-small {
+  display: none;
+  visibility: hidden;
+}
+
+@media (max-width: 700px) {
+  .work-process {
+    margin-bottom: 60px;
+  }
+
+  .work-process-title {
+    margin-bottom: 5px;
+  }
+
+  .work-process-description {
+    text-align: justify;
+  }
+
+  .work-process-title.is-selected {
+    color: black;
+  }
+
+  .work-process-description.is-selected {
+    color: black;
+  }
+
+  .work-process-illustration-small {
+    display: block;
+    visibility: visible;
+
+    width: 268px;
+    height: 60px;
+    margin-top: 5px;
+  }
+}
+
+.process-illustrations-large {
+  position: relative;
+  /* width: 450px;
+  height: 875px; */
+  width: 337.5px;
+  height: 656px;
+  margin-right: 25px;
+}
+
+.process-illustration-large {
+  position: absolute;
+  width: 337.5px;
+  height: 656px;
+  opacity: 0;
+
+  -webkit-transition: opacity .3s ease-in-out;
+  -moz-transition: opacity .3s ease-in-out;
+  -ms-transition: opacity .3s ease-in-out;
+  -o-transition: opacity .3s ease-in-out;
+  transition: opacity .3s ease-in-out;
+}
+
+.process-illustration-large.is-active {
+  opacity: 1;
+}
+
+@media (max-width: 700px) {
+  .process-illustrations-large {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.work-process-list {
+  width: 370px;
+  margin-right: 10px;
+  list-style: none;
+}
+
+@media (max-width: 700px) {
+  .work-process-list {
+    width: 277px;
+    padding-left: 0;
+    margin-right: 0;
+  }
+}
+
+.contact-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-option {
+  display: inline-block;
+  margin: 0px;
+
+  font-family: 'Dosis', sans-serif;
+  font-size: 20px;
+}
+
+.contact-option-buffer {
+  display: inline-block;
+  margin: 0 5px;
+
+  font-family: 'Dosis', sans-serif;
+  font-size: 20px;
+}
+
+.email-contact-option {
+  cursor: pointer;
+}
+
+.github-logo-light {
+  display: none;
+  visibility: hidden;
+}
+
+@media (max-width: 700px) {
+  .contact-option {
+    color: white;
+    font-size: 14px;
+  }
+
+  .contact-option-buffer {
+    color: white;
+  }
+
+  .github-logo {
+    display: none;
+    visibility: hidden;
+  }
+
+  .github-logo-light {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    visibility: visible;
+  }
+}
+
+.toast-notifications {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 20px;
+  padding-left: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toast-notification {
+  padding: 0 20px;
+
+  color: white;
+  font-family: 'Dosis', sans-serif;
+  font-size: 20px;
+
+  background-color: #45c0ff;
+  border-radius: 5px;
+  box-shadow: #88939f 0px 2px 4px, #88939f 0px 0px 8px;
+  list-style: none;
+  opacity: 0;
+
+  -webkit-transition: opacity .3s ease-in-out;
+  -moz-transition: opacity .3s ease-in-out;
+  -ms-transition: opacity .3s ease-in-out;
+  -o-transition: opacity .3s ease-in-out;
+  transition: opacity .3s ease-in-out;
+}
+
+.toast-notification.is-active {
+  opacity: 1;
+}
+
+@media (max-width: 700px) {
+  .toast-notification {
+    font-size: 16px;
+  }
+}
