@@ -63,9 +63,14 @@ function getToken() {
 }
 
 function fetchGoogleAPIAccessToken() {
-  const cert = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY;
+  const cert = prcoess.env && process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY;
+  const clientEmail = process.env && process.env.GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL;
+  if (!cert || !clientEmail) {
+    throw Error(`Expected 'GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY' and 'GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL' to be defined in .env`);
+  }
+
   const claimSet = {
-    iss: process.env.GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL,
+    iss: clientEmail,
     scope: 'https://www.googleapis.com/auth/gmail.send',
     aud: 'https://www.googleapis.com/oauth2/v4/token',
     exp: Math.floor(Date.now() / 1000) + 60,
