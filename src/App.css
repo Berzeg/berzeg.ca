@@ -1,11 +1,37 @@
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
-.page-header, .page-footer {
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Dosis', sans-serif;
+}
+
+.page {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page__body {
+  position: relative;
+  flex: 1;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.page__header, .page__footer {
   position: relative;
   height: 125px;
+  flex: 0;
 
   display: flex;
   flex-direction: column;
@@ -14,15 +40,15 @@
 }
 
 @media (max-width: 700px) {
-  .page-header {
+  .page__header {
     height: 100px;
   }
 
-  .page-footer {
+  .page__footer {
     height: auto;
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: black;
+    background-color: #2f2f2f;
   }
 
   .footer-title {
@@ -38,6 +64,96 @@
 @media (max-width: 700px) {
   .page-title {
     font-size: 20px;
+  }
+}
+
+.email-form {
+  position: relative;
+  padding: 30px 0px;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  align-items: center;
+  background-color: #00c39e;
+  color: white;
+}
+
+.email-form__button {
+  width: 200px;
+  height: 85px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background-color: white;
+  color: #00c39e;
+  font-family: 'Dosis', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.email-form__button:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.email-form__button.email-form__button--fail {
+  color: #d63833;
+}
+
+.email-form__close {
+  position: absolute;
+  padding: 20px;
+  right: 0px;
+  top: 0px;
+  cursor: pointer;
+}
+
+.email-form__errors {
+  margin-bottom: 20px;
+  color: #d63833;
+}
+
+.email-form__field {
+  width: 500px;
+  height: 75px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 3px solid white;
+  border-radius: 5px;
+  background: none;
+  color: white;
+  font-family: 'Dosis', sans-serif;
+  font-size: 20px;
+  line-height: 45px;
+}
+
+.email-form__text {
+  margin-bottom: 20px;
+  font-family: 'Dosis', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+textarea.email-form__field {
+  height: 190px;
+  resize: none;
+}
+
+.email-form__field::placeholder {
+  color: white;
+  font-family: 'Dosis', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+@media(max-width: 700px) {
+  .email-form__field {
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    align-self: stretch;
   }
 }
 
@@ -82,11 +198,11 @@
 }
 
 .work-process-title.is-selected {
-  color: #45c0ff;
+  color: #00c39e;
 }
 
 .work-process-description.is-selected {
-  color: #45c0ff;
+  color: #00c39e;
 }
 
 .work-process-illustration-small {
@@ -108,11 +224,11 @@
   }
 
   .work-process-title.is-selected {
-    color: black;
+    color: #2f2f2f;
   }
 
   .work-process-description.is-selected {
-    color: black;
+    color: #2f2f2f;
   }
 
   .work-process-illustration-small {
@@ -173,6 +289,8 @@
 }
 
 .contact-options {
+  position: relative;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -180,48 +298,111 @@
 }
 
 .contact-option {
-  display: inline-block;
-  margin: 0px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   font-family: 'Dosis', sans-serif;
   font-size: 20px;
 }
 
-.contact-option-buffer {
+.contact-option:hover {
+  cursor: pointer;
+}
+
+.contact-option-separator {
   display: inline-block;
-  margin: 0 5px;
+  margin: auto 10px;
 
   font-family: 'Dosis', sans-serif;
   font-size: 20px;
+}
+
+.contact-option__email-form-hint {
+  position: absolute;
+  right: 20px;
+  margin: auto;
+  display: inline-block;
+  color: #2f2f2f;
+}
+
+.contact-option__email-form-hint--mobile {
+  display: none;
 }
 
 .email-contact-option {
   cursor: pointer;
 }
 
-.github-logo-light {
+.email-icon--mobile {
+  width: 30px;
+  height: 23px;
+}
+
+.github-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.observable-hq-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.email-icon--mobile,
+.github-icon--mobile,
+.observable-hq-icon--mobile {
   display: none;
   visibility: hidden;
 }
 
 @media (max-width: 700px) {
+  .contact-options {
+    flex-direction: column;
+  }
+
   .contact-option {
-    color: white;
-    font-size: 14px;
+    height: 50px;
+    margin: 0px 25px 15px 25px;
+    border: 2px solid white;
+    border-radius: 5px;
+    align-self: stretch;
+    align-items: center;
   }
 
-  .contact-option-buffer {
-    color: white;
+  .contact-option:hover {
+    background-color: rgba(255, 255, 255, 0.25);
   }
 
-  .github-logo {
+  .contact-option-separator {
     display: none;
     visibility: hidden;
   }
 
-  .github-logo-light {
-    width: 18px;
-    height: 18px;
+  .contact-option__email-form-hint {
+    display: none;
+  }
+
+  .contact-option__email-form-hint--mobile {
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    margin: auto;
+    font-size: 12px;
+    color: white;
+  }
+
+  .email-icon,
+  .github-icon,
+  .observable-hq-icon {
+    display: none;
+    visibility: hidden;
+  }
+
+  .email-icon--mobile,
+  .github-icon--mobile,
+  .observable-hq-icon--mobile {
     display: inline-block;
     visibility: visible;
   }
@@ -248,7 +429,7 @@
   font-family: 'Dosis', sans-serif;
   font-size: 20px;
 
-  background-color: #45c0ff;
+  background-color: #00c39e;
   border-radius: 5px;
   box-shadow: #88939f 0px 2px 4px, #88939f 0px 0px 8px;
   list-style: none;

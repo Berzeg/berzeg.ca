@@ -3,7 +3,7 @@ import {WORK_PROCESSES} from '../constants/workProcess';
 import WorkProcessIllustrations from './WorkProcessIllustrations';
 import WorkProcess from './WorkProcess';
 
-class WorkProcesses extends Component {
+class MyWorkflow extends Component {
   constructor(props) {
     super(props);
     this.state = this.initialState;
@@ -130,4 +130,4 @@ class WorkProcesses extends Component {
   }
 }
 
-export default WorkProcesses;
+export default MyWorkflow;

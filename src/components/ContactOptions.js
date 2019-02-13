@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import CopyToClipboard from 'react-copy-to-clipboard';
-import githubLogo from '../images/github_icon.svg';
-import githubLogoLight from '../images/github_icon_light.svg';
+import emailIcon from '../images/email_icon.svg';
+import emailIconLight from '../images/email_icon_light.svg';
+import githubIcon from '../images/github_icon.svg';
+import githubIconLight from '../images/github_icon_light.svg';
+import observableHQIcon from '../images/observable_hq_icon.svg';
+import observableHQIconLight from '../images/observable_hq_icon_light.svg';
 
 class ContactOptions extends Component {
   render() {
@@ -10,27 +13,65 @@ class ContactOptions extends Component {
 
     return (
       <span className="contact-options">
-        <CopyToClipboard
-          text={email}
-          onCopy={this.props.onEmailCopied}
-          >
+        {this.props.isShowingEmailForm &&
+          <p className="contact-option__email-form-hint">👇</p>
+        }
 
-          <p className="contact-option email-contact-option">
-            {email}
-          </p>
-        </CopyToClipboard>
-
-        <p className="contact-option-buffer">|</p>
-        <a className="contact-option" href="https://github.com/berzeg">
+        <span
+          className="contact-option"
+          onClick={this.props.onShowEmailFormClick}
+        >
           <img
-            className="github-logo"
-            src={githubLogo}
+            className="email-icon"
+            src={emailIcon}
+            alt="contact me via email"
+            />
+
+          <img
+            className="email-icon--mobile"
+            src={emailIconLight}
+            alt="contact me via email"
+            />
+
+          {this.props.isShowingEmailForm &&
+            <p className="contact-option__email-form-hint--mobile">Scroll Down</p>
+          }
+        </span>
+
+        <p className="contact-option-separator">|</p>
+
+        <a
+          className="contact-option"
+          href="https://beta.observablehq.com/@berzeg"
+        >
+          <img
+            className="observable-hq-icon"
+            src={observableHQIcon}
+            alt="go to observable hq profile page"
+            />
+
+          <img
+            className="observable-hq-icon--mobile"
+            src={observableHQIconLight}
+            alt="go to observable hq profile page"
+            />
+        </a>
+
+        <p className="contact-option-separator">|</p>
+
+        <a
+          className="contact-option"
+          href="https://github.com/berzeg"
+        >
+          <img
+            className="github-icon"
+            src={githubIcon}
             alt="go to github profile page"
             />
 
           <img
-            className="github-logo-light"
-            src={githubLogoLight}
+            className="github-icon--mobile"
+            src={githubIconLight}
             alt="go to github profile page"
             />
         </a>
@@ -40,7 +81,8 @@ class ContactOptions extends Component {
 }
 
 ContactOptions.propTypes = {
-  onEmailCopied: PropTypes.func.isRequired,
-}
+  isShowingEmailForm: PropTypes.bool.isRequired,
+  onShowEmailFormClick: PropTypes.func.isRequired,
+};
 
 export default ContactOptions;
