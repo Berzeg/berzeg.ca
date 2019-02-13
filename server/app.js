@@ -25,13 +25,7 @@ app.post('/email_send', (req, res) => {
     });
 });
 
-let port = 3001;
-if (argv.port) {
-  port = argv.port;
-}
-if (argv.p) {
-  port = argv.p;
-}
+const port = process.env.PORT ? process.env.PORT : 3001;
 app.listen(port, () =>
   console.log(`Express server is running on localhost:${port}`);
 );
