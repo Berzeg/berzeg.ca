@@ -63,7 +63,7 @@ function getToken() {
 }
 
 function fetchGoogleAPIAccessToken() {
-  const cert = prcoess.env && process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY;
+  const cert = process.env && process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY;
   const clientEmail = process.env && process.env.GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL;
   if (!cert || !clientEmail) {
     throw Error(`Expected 'GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY' and 'GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL' to be defined in .env`);
