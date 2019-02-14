@@ -18,10 +18,9 @@
     "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "api": "node-env-run server/app.js --exec nodemon",
+    "start": "node-env-run server/app.js --exec nodemon",
     "memcache": "redis-server --port 3002 &",
-    "server": "run-p memcache api start",
+    "server": "run-p memcache start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

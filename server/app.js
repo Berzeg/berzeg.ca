@@ -8,6 +8,7 @@ const emailSend = require('./methods/email_send.js');
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('build'));
 
 app.post('/email_send', (req, res) => {
   const email = req.body.email;
@@ -31,7 +32,7 @@ app.listen(port, () => {
   console.log(`Express server is running on localhost:${port}`);
 });
 
-if (process.env.HTTPS) {
+if (process.env.HTTPS === 'true') {
   if (!process.env.BERZEG_CA_SSL_KEY || !process.env.BERZEG_CA_SSL_CERT) {
     throw Error(`Must define paths to ssl key and certificate by assigning .env variables 'BERZEG_CA_SSL_KEY' and 'BERZEG_CA_SSL_CERT'`);
   }
