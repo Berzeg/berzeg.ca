@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
+const fs = require('fs');
 const https =  require('https');
 
 const emailSend = require('./methods/email_send.js');
@@ -26,9 +27,9 @@ app.post('/email_send', (req, res) => {
 });
 
 const port = process.env.PORT ? process.env.PORT : 3001;
-app.listen(port, () =>
+app.listen(port, () => {
   console.log(`Express server is running on localhost:${port}`);
-);
+});
 
 if (process.env.HTTPS) {
   if (!process.env.BERZEG_CA_SSL_KEY || !process.env.BERZEG_CA_SSL_CERT) {
@@ -36,7 +37,8 @@ if (process.env.HTTPS) {
   }
 
   https.createServer({
-    key: fs.readFileSync(process.env.BERZEG_CA_SSL_KEY),
-    cert: fs.readFileSync(process.env.BERZEG_CA_SSL_CERT),
-  }, app).listen(443);
+      key: fs.readFileSync(process.env.BERZEG_CA_SSL_KEY),
+      cert: fs.readFileSync(process.env.BERZEG_CA_SSL_CERT),
+    },
+    app).listen(443);
 }
