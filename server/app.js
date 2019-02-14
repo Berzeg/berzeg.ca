@@ -24,7 +24,7 @@ app.post('/email_send', (req, res) => {
     .then(googleAPIResponse => {
       if (googleAPIResponse.status === 200) {
         res.sendStatus(200);
-      } else [
+      } else {
         res.sendStatus(500);
       }
     })

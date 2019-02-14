@@ -87,7 +87,7 @@ function fetchGoogleAPIAccessToken() {
 }
 
 function sendMail(token, rawMail) {
-  fetch('https://www.googleapis.com/gmail/v1/users/me/messages/send', {
+  return fetch('https://www.googleapis.com/gmail/v1/users/me/messages/send', {
       method: 'POST',
       headers: {
         'Content-length': rawMail.length,
