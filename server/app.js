@@ -7,20 +7,27 @@ const emailSend = require('./methods/email_send.js');
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('build'));
 
 app.post('/email_send', (req, res) => {
-  const email = req.body.email;
+  const from = req.body.from;
   const subject = req.body.subject;
   const message = req.body.message;
 
   emailSend(
-      email,
+      from,
       subject,
       message
     )
-    .then(() => res.sendStatus(200))
+    .then(googleAPIResponse => {
+      if (googleAPIResponse.status === 200) {
+        res.sendStatus(200);
+      } else [
+        res.sendStatus(500);
+      }
+    })
     .catch(err => {
       console.error(`Encountered error while attempting to send email:\n${err}`);
       res.sendStatus(500);

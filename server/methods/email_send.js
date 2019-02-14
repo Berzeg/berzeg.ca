@@ -5,18 +5,18 @@ const MailComposer = require("nodemailer/lib/mail-composer");
 const Redis = require('ioredis');
 
 module.exports = function(
-  email,
+  from,
   subject,
   message
 ) {
-  email = email ? email : '';
+  from = from ? from : '';
   subject = subject ? subject : '';
   message = message ? message : '';
 
-  const modifiedMessage = `Message from berzeg.ca email form\n#From: ${email}\n#Subject: ${subject}\n\n${message}`;
+  const modifiedMessage = `Message from berzeg.ca email form\n#From: ${from}\n#Subject: ${subject}\n\n${message}`;
 
   const rawMailPromise = getRawMail({
-    from: `Automated Mail Form <${email}>`,
+    from: `Automated Mail Form <${from}>`,
     to: 'hashem@berzeg.ca',
     subject,
     message: modifiedMessage,
@@ -26,10 +26,7 @@ module.exports = function(
       getToken(),
       rawMailPromise,
     ])
-    .then(([token, rawMail]) => {
-      console.log(`token: ${token}; rawMail: ${rawMail}`);
-      return sendMail(token, rawMail)
-    });
+    .then(([token, rawMail]) => sendMail(token, rawMail));
 }
 
 function getToken() {
@@ -56,7 +53,6 @@ function getToken() {
               .then(() => access_token);
           })
       } else {
-        console.log(`found token from redis: '${results[0]}'; expires at: '${results[1]}'`);
         return Promise.resolve(token);
       }
     })
@@ -73,8 +69,9 @@ function fetchGoogleAPIAccessToken() {
     iss: clientEmail,
     scope: 'https://www.googleapis.com/auth/gmail.send',
     aud: 'https://www.googleapis.com/oauth2/v4/token',
-    exp: Math.floor(Date.now() / 1000) + 60,
-    iat: Math.floor(Date.now() / 1000)
+    exp: Math.floor(Date.now() / 1000) + 3600,
+    iat: Math.floor(Date.now() / 1000),
+    sub: 'hashem@berzeg.ca',
   };
   const token = jwt.sign(claimSet, cert, {algorithm: 'RS256'});
 
@@ -86,11 +83,7 @@ function fetchGoogleAPIAccessToken() {
       method: 'POST',
       body: params
     })
-    .then(res => res.json())
-    .then(json => {
-      console.log(`token json: ${JSON.stringify(json)}`);
-      return json;
-    });
+    .then(res => res.json());
 }
 
 function sendMail(token, rawMail) {
@@ -102,13 +95,6 @@ function sendMail(token, rawMail) {
         'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({raw: rawMail}),
-    })
-    .then(res => {
-      console.log(`res status: ${res.status}`);
-      return res.json();
-    })
-    .then(json => {
-      console.log(`res json: ${JSON.stringify(json)}`);
     });
 }
 
